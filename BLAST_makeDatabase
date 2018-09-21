@@ -1,0 +1,18 @@
+#!/bin/bash 
+#SBATCH -D /global/scratch/peter_stokes/BLAST/databases
+#SBATCH -J blast_db
+#SBATCH --partition=vector
+#SBATCH --qos=vector_batch
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=6
+#SBATCH --mem=16000
+#SBATCH --time=4:00:00
+#SBATCH -o /global/home/users/peter_stokes.out
+#SBATCH -e /global/home/users/peter_stokes.err
+#SBATCH --mail-user=peter_stokes@berkeley.edu
+#SBATCH --mail-type=All
+
+module load blast/2.2.30
+
+srun makeblastdb -in ../fullAssembly_pseudohap2.1.fasta -input_type fasta -dbtype nucl -title pseudohap2.1_db -out pseudohap2.1_db
